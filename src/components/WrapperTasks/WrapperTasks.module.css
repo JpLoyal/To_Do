@@ -1,0 +1,11 @@
+.containerTasks {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.tituloTarefa {
+    background-color: var(--azulEscuro);
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+}
