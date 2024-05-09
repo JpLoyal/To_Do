@@ -20,8 +20,27 @@
     gap: 5px;
 }
 
+.spanDataHorario {
+    display: flex;
+    gap: 3px;
+}
+
+.botoesAttDel {
+    background-color: var(--branco);
+    color: black;
+    padding: 4px 4px 0px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+    border: 1px solid black;
+}
+
+.botaoDel {
+    color: rgb(134, 6, 6);
+}
+
 .containerDataHorario {
     font-size: 12px;
     display: flex;
     gap: 6px;
+    margin-top: 5px;
 }

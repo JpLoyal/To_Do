@@ -61,18 +61,21 @@ const ModalAtualizarTarefa = ({
                     type='text'
                     value={descricaoAtualizacaoTarefa}
                     onChange={(evento) => setDescricaoAtualizacaoTarefa(evento.target.value)}
+                    required
                 />
 
                 <input
                     type="date"
                     value={dataAtualizacaoTarefa}
                     onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
+                    required
                 />
 
                 <input
                     type='time'
                     value={horarioAtualizacaoTarefa}
                     onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
+                    required
                 />
 
                 <button type='submit'>Atualizar Tarefa</button>

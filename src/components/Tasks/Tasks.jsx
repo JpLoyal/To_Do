@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ModalAtualizarTarefa from '../Modals/ModalAtualizarTarefa/ModalAtualizarTarefa';
 import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa';
 
-import { FaPenAlt, FaTrash } from "react-icons/fa";
+import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 
 const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
 
@@ -44,17 +44,17 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
                                     {index + 1} - {tarefa.descricao}
                                 </div>
                                 <div className={styles.containerDataHorario}>
-                                    <span>{tarefa.horario}</span>
-                                    <span>{tarefa.data}</span>
+                                    <span className={styles.spanDataHorario}> <FaClock /> {tarefa.horario}</span>
+                                    <span className={styles.spanDataHorario}> <FaCalendar /> {tarefa.data}</span>
                                 </div>
                             </div>
                             <span className={styles.spanBotoesAttDel}>
-                                <button onClick={() => {
+                                <button className={styles.botoesAttDel} onClick={() => {
                                     abrirModalDeAtualizacao(index);
                                 }}>
                                     <FaPenAlt />
                                 </button>
-                                <button onClick={() => {
+                                <button className={`${styles.botoesAttDel} ${styles.botaoDel}`} onClick={() => {
                                     abrirModalDeExclusao(index)
                                 }}>
                                     <FaTrash />

@@ -32,18 +32,21 @@ const ModalAdicionarTarefa = ({
                     value={descricaoNovaTarefa.descricao}
                     onChange={(evento)=>setDescricaoNovaTarefa(evento.target.value)}
                     placeholder="Descrição da Tarefa"
+                    required
                 />
 
                 <input
                     type="date"
                     placeholder="Data"
                     onChange={(evento)=>setDataNovaTarefa(evento.target.value)}
+                    required
                 />
 
                 <input
                     type="time"
                     placeholder="Hora"
                     onChange={(evento)=>setHorarioNovaTarefa(evento.target.value)}
+                    required
                 />
                 
 

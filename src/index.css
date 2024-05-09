@@ -1,8 +1,6 @@
 :root {
-    --azulEscuro: #7172d3;
-    --azulClaro: #e9e9ee;
-    --bege: #f1debd;
-    --branco: #FFF;
+    --azulEscuro: #6C63FF;
+    --branco: #F7F7F7;
     --cinza: #e0e0e0;
 }
 
@@ -10,9 +8,16 @@ html {
     font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-style: normal;
-    background-color: var(--azulClaro);
+    background-color: var(--branco);
+    color: #272323;
 }
 
 button {
     cursor: pointer;
+    background-color: var(--azulEscuro);
+    color: var(--branco);
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: 500;
 }
