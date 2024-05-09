@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
 
 const WrapperTasks = () => {
-    const [tasks, setTasks] = useState(['Escovar os dentes', 'Tomar café', 'Passar Creme']);
+    const [tasks, setTasks] = useState(['Escovar os dentes', 'Tomar Café', 'Passar Creme']);
     const [inputValue, setInputValue] = useState('');
  
     function adicionarTarefa(){
@@ -26,13 +26,19 @@ const WrapperTasks = () => {
     return (
         <section className={styles.containerTasks}>
             <h1 className={styles.tituloTarefa}>Tarefas</h1>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={(evento)=>setInputValue(evento.target.value)}
-            />
-            <button onClick={() => adicionarTarefa()}>Adicionar Tarefa</button>
-
+            
+            <form onSubmit={(evento) => {
+                evento.preventDefault();
+                adicionarTarefa();
+            }}>
+                <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(evento)=>setInputValue(evento.target.value)}
+                />
+                <button type='submit'>Adicionar Tarefa</button>
+            </form>
+        
             <Tasks
                 tasks={tasks}
                 atualizarTarefa={atualizarTarefa}
