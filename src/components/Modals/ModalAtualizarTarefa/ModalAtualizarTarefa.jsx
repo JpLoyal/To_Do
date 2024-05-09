@@ -1,4 +1,5 @@
 import ReactModal from 'react-modal';
+import { useState, useEffect } from 'react';
 
 const ModalAtualizarTarefa = ({
     tasks,
@@ -10,6 +11,23 @@ const ModalAtualizarTarefa = ({
     setTarefaAtualizadaNoInputDoModal,
     setModalAtualizarIsOpen
 }) => {
+
+    const [idAtualizacaoTarefa, setIdAtualizacaoTarefa] = useState('');
+    const [descricaoAtualizacaoTarefa, setDescricaoAtualizacaoTarefa] = useState('');
+    const [dataAtualizacaoTarefa, setDataAtualizacaoTarefa] = useState('');
+    const [horarioAtualizacaoTarefa, setHorarioAtualizacaoTarefa] = useState('');
+    const [statusAtualizacaoTarefa, setStatusAtualizacaoTarefa] = useState('');
+
+    useEffect(() => {
+        if (indexDaTarefaASerAtualizada !== null) {
+            setIdAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].id)
+            setDescricaoAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].descricao);
+            setDataAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].data);
+            setHorarioAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].horario);
+            setStatusAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].status);
+        }
+    }, [indexDaTarefaASerAtualizada, tasks]);
+
     return (
         <ReactModal
             isOpen={modalAtualizarIsOpen}
@@ -27,13 +45,36 @@ const ModalAtualizarTarefa = ({
                 evento.preventDefault();
                 atualizarTarefa(indexDaTarefaASerAtualizada, tarefaAtualizadaNoInputDoModal);
                 setTarefaAtualizadaNoInputDoModal('');
-                setModalAtualizarIsOpen(false);                    
+                setModalAtualizarIsOpen(false);
+                
+                const objTarefaAtualizada = {
+                    id: idAtualizacaoTarefa,
+                    descricao: descricaoAtualizacaoTarefa,
+                    data: dataAtualizacaoTarefa,
+                    horario: horarioAtualizacaoTarefa,
+                    status: statusAtualizacaoTarefa,
+                }
+                atualizarTarefa(indexDaTarefaASerAtualizada, objTarefaAtualizada)
+                
             }}>
                 <input
                     type='text'
-                    value={tarefaAtualizadaNoInputDoModal}
-                    onChange={(evento) => setTarefaAtualizadaNoInputDoModal(evento.target.value)}
+                    value={descricaoAtualizacaoTarefa}
+                    onChange={(evento) => setDescricaoAtualizacaoTarefa(evento.target.value)}
                 />
+
+                <input
+                    type="date"
+                    value={dataAtualizacaoTarefa}
+                    onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
+                />
+
+                <input
+                    type='time'
+                    value={horarioAtualizacaoTarefa}
+                    onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
+                />
+
                 <button type='submit'>Atualizar Tarefa</button>
             </form>
 
