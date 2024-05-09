@@ -40,7 +40,13 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
                     return (
                         <li key={index} className={styles.elementoListaTarefas}>
                             <div>
-                                {index + 1} - {tarefa}
+                                <div>
+                                    {index + 1} - {tarefa.descricao}
+                                </div>
+                                <div className={styles.containerDataHorario}>
+                                    <span>{tarefa.horario}</span>
+                                    <span>{tarefa.data}</span>
+                                </div>
                             </div>
                             <span className={styles.spanBotoesAttDel}>
                                 <button onClick={() => {

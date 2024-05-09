@@ -1,0 +1,56 @@
+import ReactModal from 'react-modal';
+import BotaoAdicionarTarefa from '../../BotaoAdicionarTarefa/BotaoAdicionarTarefa';
+
+const ModalAdicionarTarefa = ({
+    modalAdicionarIsOpen,
+    fecharModalDeCriacao,
+    adicionarTarefa,
+    idNovaTarefa,
+    setIdNovaTarefa,
+    descricaoNovaTarefa,
+    setDescricaoNovaTarefa,
+    dataNovaTarefa,
+    setDataNovaTarefa,
+    horarioNovaTarefa,
+    setHorarioNovaTarefa,
+    statusNovaTarefa,
+    setStatusNovaTarefa,
+}) => {
+
+    return (
+        <ReactModal
+            isOpen={modalAdicionarIsOpen}
+            onRequestClose={fecharModalDeCriacao}
+        >
+            <form onSubmit={(evento) => {
+                evento.preventDefault();
+                adicionarTarefa();
+                fecharModalDeCriacao();
+            }}>
+                <input
+                    type="text"
+                    value={descricaoNovaTarefa.descricao}
+                    onChange={(evento)=>setDescricaoNovaTarefa(evento.target.value)}
+                    placeholder="Descrição da Tarefa"
+                />
+
+                <input
+                    type="date"
+                    placeholder="Data"
+                    onChange={(evento)=>setDataNovaTarefa(evento.target.value)}
+                />
+
+                <input
+                    type="time"
+                    placeholder="Hora"
+                    onChange={(evento)=>setHorarioNovaTarefa(evento.target.value)}
+                />
+                
+
+                <BotaoAdicionarTarefa />
+            </form>
+        </ReactModal>
+    )
+}
+
+export default ModalAdicionarTarefa;

@@ -14,7 +14,10 @@ const ModalExcluirTarefa = ({
                 onRequestClose={fecharModalDeExclusao}
             >
                 <h4>Tem certeza que deseja excluir a seguinte tarefa:</h4>
-                <p>{tasks[indexDaTarefaASerExcluida]}</p>
+
+                {indexDaTarefaASerExcluida !== null && (
+                    <p>{tasks[indexDaTarefaASerExcluida].descricao}</p>
+                )}
 
                 <button onClick={() => {
                     removerTarefa(indexDaTarefaASerExcluida);

@@ -16,7 +16,10 @@ const ModalAtualizarTarefa = ({
             onRequestClose={fecharModalDeAtualizacao}
         >
             <h4>Tarefa a ser atualizada:</h4>
-            <p>{tasks[indexDaTarefaASerAtualizada]}</p>
+            
+            {indexDaTarefaASerAtualizada !== null && (
+                <p>{tasks[indexDaTarefaASerAtualizada].descricao}</p>
+            )}
 
             <h4>Nova Tarefa:</h4>
 
