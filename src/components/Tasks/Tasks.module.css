@@ -1,11 +1,21 @@
-ul {
+.listaTarefas {
     list-style-type: none;
-    padding: 0;
+    border-radius: 10px;
+    padding: 3px 15px;
+    background-color: var(--cinza);
 }
 
-li {
-    background-color: var(--bege);
-    margin: 16px 0;
-    padding: 5px;
+.elementoListaTarefas {
+    background-color: var(--branco);
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spanBotoesAttDel {
+    display: flex;
+    gap: 5px;
 }

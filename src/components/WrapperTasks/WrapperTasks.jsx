@@ -2,6 +2,8 @@ import styles from './WrapperTasks.module.css';
 import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
 
+import BotaoAdicionarTarefa from '../BotaoAdicionarTarefa/BotaoAdicionarTarefa';
+
 const WrapperTasks = () => {
     const [tasks, setTasks] = useState(['Escovar os dentes', 'Tomar Café', 'Passar Creme']);
     const [inputValue, setInputValue] = useState('');
@@ -36,7 +38,7 @@ const WrapperTasks = () => {
                     value={inputValue}
                     onChange={(evento)=>setInputValue(evento.target.value)}
                 />
-                <button type='submit'>Adicionar Tarefa</button>
+                <BotaoAdicionarTarefa />
             </form>
         
             <Tasks

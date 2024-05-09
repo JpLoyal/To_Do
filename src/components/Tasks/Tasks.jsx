@@ -1,10 +1,10 @@
 import styles from './Tasks.module.css';
 import { useState } from 'react';
 
-import ReactModal from 'react-modal';
+import ModalAtualizarTarefa from '../Modals/ModalAtualizarTarefa/ModalAtualizarTarefa';
+import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa';
 
-
-ReactModal.setAppElement('#root');
+import { FaPenAlt, FaTrash } from "react-icons/fa";
 
 const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
 
@@ -35,21 +35,23 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
 
     return (
         <>
-            <ul className={styles.ul}>
+            <ul className={styles.listaTarefas}>
                 {tasks.map((tarefa, index)=>{
                     return (
-                        <li key={index}>
-                            {index + 1} - {tarefa}
-                            <span>
+                        <li key={index} className={styles.elementoListaTarefas}>
+                            <div>
+                                {index + 1} - {tarefa}
+                            </div>
+                            <span className={styles.spanBotoesAttDel}>
                                 <button onClick={() => {
                                     abrirModalDeAtualizacao(index);
                                 }}>
-                                    U
+                                    <FaPenAlt />
                                 </button>
                                 <button onClick={() => {
                                     abrirModalDeExclusao(index)
                                 }}>
-                                    D
+                                    <FaTrash />
                                 </button>
                             </span>
                         </li>
@@ -57,50 +59,25 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
                 })}
             </ul>
 
-            {/* Modal de atualização de tarefa */}
-            <ReactModal
-                isOpen={modalAtualizarIsOpen}
-                onRequestClose={fecharModalDeAtualizacao}
-            >
-                <h4>Tarefa a ser atualizada:</h4>
-                <p>{tasks[indexDaTarefaASerAtualizada]}</p>
+            <ModalAtualizarTarefa 
+                tasks={tasks}
+                atualizarTarefa={atualizarTarefa}
+                modalAtualizarIsOpen={modalAtualizarIsOpen}
+                fecharModalDeAtualizacao={fecharModalDeAtualizacao}
+                indexDaTarefaASerAtualizada={indexDaTarefaASerAtualizada}
+                tarefaAtualizadaNoInputDoModal={tarefaAtualizadaNoInputDoModal}
+                setTarefaAtualizadaNoInputDoModal={setTarefaAtualizadaNoInputDoModal}
+                setModalAtualizarIsOpen={setModalAtualizarIsOpen}
+            />
 
-                <h4>Nova Tarefa:</h4>
-
-                <form onSubmit={(evento) => {
-                    evento.preventDefault();
-                    atualizarTarefa(indexDaTarefaASerAtualizada, tarefaAtualizadaNoInputDoModal);
-                    setTarefaAtualizadaNoInputDoModal('');
-                    setModalAtualizarIsOpen(false);                    
-                }}>
-                    <input
-                        type='text'
-                        value={tarefaAtualizadaNoInputDoModal}
-                        onChange={(evento) => setTarefaAtualizadaNoInputDoModal(evento.target.value)}
-                    />
-                    <button type='submit'>Atualizar Tarefa</button>
-                </form>
-
-                <button onClick={fecharModalDeAtualizacao}>Fechar Modal</button>
-            </ReactModal>
-
-            {/* Modal de exclusão de tarefa */}
-            <ReactModal
-                isOpen={modalExcluirIsOpen}
-                onRequestClose={fecharModalDeExclusao}
-            >
-                <h4>Tem certeza que deseja excluir a seguinte tarefa:</h4>
-                <p>{tasks[indexDaTarefaASerExcluida]}</p>
-
-                <button onClick={() => {
-                    removerTarefa(indexDaTarefaASerExcluida);
-                    setModalExcluirIsOpen(false);
-                }}>
-                    Excluir
-                </button>
-
-                <button onClick={fecharModalDeExclusao}>Fechar Modal</button>
-            </ReactModal>
+            <ModalExcluirTarefa
+                tasks={tasks}
+                modalExcluirIsOpen={modalExcluirIsOpen}
+                fecharModalDeExclusao={fecharModalDeExclusao}
+                removerTarefa={removerTarefa}
+                indexDaTarefaASerExcluida={indexDaTarefaASerExcluida}
+                setModalExcluirIsOpen={setModalExcluirIsOpen}
+            />
         </>
     )
 }
