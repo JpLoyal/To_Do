@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import { useState, useEffect } from 'react';
+import styles from './ModalAtualizarTarefa.module.css';
 
 const ModalAtualizarTarefa = ({
     tasks,
@@ -32,56 +33,58 @@ const ModalAtualizarTarefa = ({
         <ReactModal
             isOpen={modalAtualizarIsOpen}
             onRequestClose={fecharModalDeAtualizacao}
+            className={'estilosModals'}
         >
-            <h4>Tarefa a ser atualizada:</h4>
-            
-            {indexDaTarefaASerAtualizada !== null && (
-                <p>{tasks[indexDaTarefaASerAtualizada].descricao}</p>
-            )}
-
-            <h4>Nova Tarefa:</h4>
-
-            <form onSubmit={(evento) => {
-                evento.preventDefault();
-                atualizarTarefa(indexDaTarefaASerAtualizada, tarefaAtualizadaNoInputDoModal);
-                setTarefaAtualizadaNoInputDoModal('');
-                setModalAtualizarIsOpen(false);
+            <section className={styles.containerModalAtualizar}>
+                <h4>Tarefa a ser atualizada:</h4>
                 
-                const objTarefaAtualizada = {
-                    id: idAtualizacaoTarefa,
-                    descricao: descricaoAtualizacaoTarefa,
-                    data: dataAtualizacaoTarefa,
-                    horario: horarioAtualizacaoTarefa,
-                    status: statusAtualizacaoTarefa,
-                }
-                atualizarTarefa(indexDaTarefaASerAtualizada, objTarefaAtualizada)
-                
-            }}>
-                <input
-                    type='text'
-                    value={descricaoAtualizacaoTarefa}
-                    onChange={(evento) => setDescricaoAtualizacaoTarefa(evento.target.value)}
-                    required
-                />
+                {indexDaTarefaASerAtualizada !== null && (
+                    <p>{tasks[indexDaTarefaASerAtualizada].descricao}</p>
+                )}
 
-                <input
-                    type="date"
-                    value={dataAtualizacaoTarefa}
-                    onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
-                    required
-                />
+                <h4>Nova Tarefa:</h4>
 
-                <input
-                    type='time'
-                    value={horarioAtualizacaoTarefa}
-                    onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
-                    required
-                />
+                <form onSubmit={(evento) => {
+                    evento.preventDefault();
+                    atualizarTarefa(indexDaTarefaASerAtualizada, tarefaAtualizadaNoInputDoModal);
+                    setTarefaAtualizadaNoInputDoModal('');
+                    setModalAtualizarIsOpen(false);
+                    
+                    const objTarefaAtualizada = {
+                        id: idAtualizacaoTarefa,
+                        descricao: descricaoAtualizacaoTarefa,
+                        data: dataAtualizacaoTarefa,
+                        horario: horarioAtualizacaoTarefa,
+                        status: statusAtualizacaoTarefa,
+                    }
+                    atualizarTarefa(indexDaTarefaASerAtualizada, objTarefaAtualizada)
+                    
+                }}>
+                    <input
+                        type='text'
+                        value={descricaoAtualizacaoTarefa}
+                        onChange={(evento) => setDescricaoAtualizacaoTarefa(evento.target.value)}
+                        required
+                    />
 
-                <button type='submit'>Atualizar Tarefa</button>
-            </form>
+                    <input
+                        type="date"
+                        value={dataAtualizacaoTarefa}
+                        onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
+                        required
+                    />
 
-            <button onClick={fecharModalDeAtualizacao}>Fechar Modal</button>
+                    <input
+                        type='time'
+                        value={horarioAtualizacaoTarefa}
+                        onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
+                        required
+                    />
+
+                    <button type='submit'>Atualizar Tarefa</button>
+                    <button type='button' onClick={fecharModalDeAtualizacao}>Cancelar</button>
+                </form>
+            </section>
         </ReactModal>
     )
 }

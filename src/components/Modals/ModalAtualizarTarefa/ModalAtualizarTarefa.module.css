@@ -1,0 +1,19 @@
+.containerModalAtualizar {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.containerModalAtualizar form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.containerModalAtualizar form button {
+    margin: 0 auto;
+    width: 50%;
+}
