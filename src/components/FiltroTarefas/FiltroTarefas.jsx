@@ -1,18 +1,16 @@
 import styles from './FiltroTarefas.module.css'
-import React, { useState } from 'react';
 import Select from 'react-select';
 
-const FiltroTarefas = () => {
-  const [filtro, setFiltro] = useState(null);
+const FiltroTarefas = ({ setFiltroTarefas }) => {
 
   const opcoesFiltro = [
     { value: 'todas', label: 'Todas' },
-    { value: 'pendentes', label: 'Pendentes' },
-    { value: 'concluidas', label: 'Concluídas' }
+    { value: 'pendente', label: 'Pendentes' },
+    { value: 'concluida', label: 'Concluídas' }
   ];
 
   const handleChange = (opcaoSelecionada) => {
-    setFiltro(opcaoSelecionada.value);
+    setFiltroTarefas(opcaoSelecionada.value);
   };
 
   return (

@@ -6,7 +6,7 @@ import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa'
 
 import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 
-const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
+const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
     const [indexDaTarefaASerAtualizada, setIndexDaTarefaASerAtualizada] = useState(null);
@@ -33,10 +33,20 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa }) => {
         setModalExcluirIsOpen(true);
     };
 
+    const tarefasFiltradas = tasks.filter(tarefa => {
+        if (filtroTarefas === 'todas') {
+            return true; // Retorna todas as tarefas
+        } else if (filtroTarefas === 'pendente') {
+            return tarefa.status === 'pendente'; // Retorna apenas as tarefas pendentes
+        } else if (filtroTarefas === 'concluida') {
+            return tarefa.status === 'concluida'; // Retorna apenas as tarefas concluídas
+        }
+    });
+
     return (
         <>
             <ul className={styles.listaTarefas}>
-                {tasks.map((tarefa, index)=>{
+                {tarefasFiltradas.map((tarefa, index)=>{
                     return (
                         <li key={index} className={styles.elementoListaTarefas}>
                             <div>

@@ -16,6 +16,8 @@ const WrapperTasks = () => {
     const [statusNovaTarefa, setStatusNovaTarefa] = useState('pendente');
 
     const [modalAdicionarIsOpen, setModalAdicionarIsOpen] = useState(false);
+
+    const [filtroTarefas, setFiltroTarefas] = useState('pendente');
  
     function adicionarTarefa(){
         const novaTarefa = {
@@ -59,7 +61,10 @@ const WrapperTasks = () => {
 
             <div className={styles.containerAddFiltrar}>
                 <button onClick={abrirModalDeCriacao}>Adicionar tarefa</button>
-                <FiltroTarefas/>
+                <FiltroTarefas
+                    filtroTarefas={filtroTarefas}
+                    setFiltroTarefas={setFiltroTarefas}
+                />
             </div>
 
             <ModalAdicionarTarefa 
@@ -82,6 +87,7 @@ const WrapperTasks = () => {
                 tasks={tasks}
                 atualizarTarefa={atualizarTarefa}
                 removerTarefa={removerTarefa}
+                filtroTarefas={filtroTarefas}
             />
 
         </section>
