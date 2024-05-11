@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
 
 import ModalAdicionarTarefa from '../Modals/ModalAdicionarTarefa/ModalAdicionarTarefa';
+import FiltroTarefas from '../FiltroTarefas/FiltroTarefas';
 import tarefas from '../../data/tarefas'
 
 const WrapperTasks = () => {
@@ -55,8 +56,11 @@ const WrapperTasks = () => {
     return (
         <section className={styles.containerTasks}>
             <h1 className={styles.tituloTarefa}>Tarefas</h1>
-        
-            <button onClick={abrirModalDeCriacao}>Adicionar tarefa</button>
+
+            <div className={styles.containerAddFiltrar}>
+                <button onClick={abrirModalDeCriacao}>Adicionar tarefa</button>
+                <FiltroTarefas/>
+            </div>
 
             <ModalAdicionarTarefa 
                 modalAdicionarIsOpen={modalAdicionarIsOpen}

@@ -9,3 +9,8 @@
     border-radius: 10px;
     color: white;
 }
+
+.containerAddFiltrar {
+    display: flex;
+    justify-content: space-between;
+}
