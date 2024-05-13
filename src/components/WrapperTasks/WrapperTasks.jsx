@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import ModalAdicionarTarefa from '../Modals/ModalAdicionarTarefa/ModalAdicionarTarefa';
 import FiltroTarefas from '../FiltroTarefas/FiltroTarefas';
-import tarefas from '../../data/tarefas'
+import tarefas from '../../data/tarefas';
 
 const WrapperTasks = () => {
     const [tasks, setTasks] = useState(tarefas);
@@ -34,15 +34,28 @@ const WrapperTasks = () => {
         setStatusNovaTarefa('');
     };
 
-    function removerTarefa(index){
+    function removerTarefa(index, tarefaASerExcluida){
         const novasTarefas = [...tasks];
-        novasTarefas.splice(index, 1);
+
+        novasTarefas.forEach((tarefa, index)=>{
+            if (tarefa.id === tarefaASerExcluida.id) {
+            novasTarefas.splice(index, 1)
+            }
+        })
+
+        // novasTarefas.splice(index, 1);
         setTasks(novasTarefas);
     };
 
     function atualizarTarefa(index, tarefaAtualizada){
         const novasTarefas = [...tasks];
-        novasTarefas[index] = tarefaAtualizada
+
+        novasTarefas.forEach((tarefa, index)=>{
+            console.log(tarefa.id === tarefaAtualizada.id)
+            if (tarefa.id === tarefaAtualizada.id) {
+                novasTarefas[index] = tarefaAtualizada
+            } 
+        })
         setTasks(novasTarefas)
     };
 

@@ -105,6 +105,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                                     </button>
                                 )}
                                 <button className={styles.botoesAttDel} onClick={() => {
+                                    console.log(index)
                                     abrirModalDeAtualizacao(index);
                                 }}>
                                     <FaPenAlt />
@@ -122,6 +123,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
 
             <ModalAtualizarTarefa 
                 tasks={tasks}
+                tarefasFiltradas={tarefasFiltradas}
                 atualizarTarefa={atualizarTarefa}
                 modalAtualizarIsOpen={modalAtualizarIsOpen}
                 fecharModalDeAtualizacao={fecharModalDeAtualizacao}
@@ -133,6 +135,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
 
             <ModalExcluirTarefa
                 tasks={tasks}
+                tarefasFiltradas={tarefasFiltradas}
                 modalExcluirIsOpen={modalExcluirIsOpen}
                 fecharModalDeExclusao={fecharModalDeExclusao}
                 removerTarefa={removerTarefa}

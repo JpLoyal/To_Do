@@ -4,6 +4,7 @@ import styles from './ModalAtualizarTarefa.module.css';
 
 const ModalAtualizarTarefa = ({
     tasks,
+    tarefasFiltradas,
     atualizarTarefa,
     modalAtualizarIsOpen,
     fecharModalDeAtualizacao,
@@ -21,11 +22,11 @@ const ModalAtualizarTarefa = ({
 
     useEffect(() => {
         if (indexDaTarefaASerAtualizada !== null) {
-            setIdAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].id)
-            setDescricaoAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].descricao);
-            setDataAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].data);
-            setHorarioAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].horario);
-            setStatusAtualizacaoTarefa(tasks[indexDaTarefaASerAtualizada].status);
+            setIdAtualizacaoTarefa(tarefasFiltradas[indexDaTarefaASerAtualizada].id)
+            setDescricaoAtualizacaoTarefa(tarefasFiltradas[indexDaTarefaASerAtualizada].descricao);
+            setDataAtualizacaoTarefa(tarefasFiltradas[indexDaTarefaASerAtualizada].data);
+            setHorarioAtualizacaoTarefa(tarefasFiltradas[indexDaTarefaASerAtualizada].horario);
+            setStatusAtualizacaoTarefa(tarefasFiltradas[indexDaTarefaASerAtualizada].status);
         }
     }, [indexDaTarefaASerAtualizada, tasks]);
 
@@ -39,7 +40,7 @@ const ModalAtualizarTarefa = ({
                 <h4>Tarefa a ser atualizada:</h4>
                 
                 {indexDaTarefaASerAtualizada !== null && (
-                    <p>{tasks[indexDaTarefaASerAtualizada].descricao}</p>
+                    <p>{tarefasFiltradas[indexDaTarefaASerAtualizada].descricao}</p>
                 )}
 
                 <h4>Nova Tarefa:</h4>

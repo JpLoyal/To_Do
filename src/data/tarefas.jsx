@@ -31,7 +31,7 @@ const tarefas = [
     },
     {
         id: uuidv4(),
-        descricao: "Responder E-mails",
+        descricao: "Responder e-mails",
         data: "2024-05-14",
         horario: "11:30",
         status: "pendente"
