@@ -57,7 +57,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                     return (
                         <li key={index} className={styles.elementoListaTarefas}>
                             <div className={styles.containerTarefaDataHorario}>
-                                <div>
+                                <div className={styles.containerIndexDescricao}>
                                     {index + 1} - {tarefa.descricao}
                                 </div>
                                 <div className={styles.containerDataHorario}>
