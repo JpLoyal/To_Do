@@ -1,5 +1,6 @@
 :root {
     --azulEscuro: #6C63FF;
+    --azulClaro: #8B85FF;
     --branco: #F7F7F7;
     --cinza: #e0e0e0;
 }
@@ -20,6 +21,11 @@ button {
     padding: 10px;
     border-radius: 3px;
     font-weight: 500;
+    box-shadow: 0 0 0 2px transparent;
+}
+
+button:hover {
+    box-shadow: 0 0 0 2px #63AFFF;
 }
 
 .estilosModals {

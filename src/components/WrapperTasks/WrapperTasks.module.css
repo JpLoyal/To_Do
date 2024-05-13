@@ -1,13 +1,15 @@
 .containerTasks {
     width: 50%;
-    margin: 0 auto;
+    margin: 50px auto 0px auto;
 }
 
 .tituloTarefa {
     background-color: var(--azulEscuro);
     text-align: center;
-    border-radius: 10px;
+    border-radius: 4px;
     color: white;
+    margin-top: 0px;
+    padding: 10px;
 }
 
 .containerAddFiltrar {
