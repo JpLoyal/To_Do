@@ -6,8 +6,6 @@ const ModalAdicionarTarefa = ({
     modalAdicionarIsOpen,
     fecharModalDeCriacao,
     adicionarTarefa,
-    idNovaTarefa,
-    setIdNovaTarefa,
     descricaoNovaTarefa,
     setDescricaoNovaTarefa,
     dataNovaTarefa,

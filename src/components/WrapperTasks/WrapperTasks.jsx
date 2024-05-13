@@ -1,6 +1,7 @@
 import styles from './WrapperTasks.module.css';
 import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
+import { v4 as uuidv4 } from 'uuid'
 
 import ModalAdicionarTarefa from '../Modals/ModalAdicionarTarefa/ModalAdicionarTarefa';
 import FiltroTarefas from '../FiltroTarefas/FiltroTarefas';
@@ -9,7 +10,6 @@ import tarefas from '../../data/tarefas'
 const WrapperTasks = () => {
     const [tasks, setTasks] = useState(tarefas);
 
-    const [idNovaTarefa, setIdNovaTarefa] = useState('');
     const [descricaoNovaTarefa, setDescricaoNovaTarefa] = useState('');
     const [dataNovaTarefa, setDataNovaTarefa] = useState('');
     const [horarioNovaTarefa, setHorarioNovaTarefa] = useState('');
@@ -21,14 +21,13 @@ const WrapperTasks = () => {
  
     function adicionarTarefa(){
         const novaTarefa = {
-            id: idNovaTarefa,
+            id: uuidv4(),
             descricao: descricaoNovaTarefa,
             data: dataNovaTarefa,
             horario: horarioNovaTarefa,
             status: statusNovaTarefa,
         }
         setTasks([...tasks, novaTarefa]);
-        setIdNovaTarefa('');
         setDescricaoNovaTarefa('');
         setDataNovaTarefa('');
         setHorarioNovaTarefa('');
@@ -71,8 +70,6 @@ const WrapperTasks = () => {
                 modalAdicionarIsOpen={modalAdicionarIsOpen}
                 fecharModalDeCriacao={fecharModalDeCriacao}
                 adicionarTarefa={adicionarTarefa}
-                idNovaTarefa={idNovaTarefa}
-                setIdNovaTarefa={setIdNovaTarefa}
                 descricaoNovaTarefa={descricaoNovaTarefa}
                 setDescricaoNovaTarefa={setDescricaoNovaTarefa}
                 dataNovaTarefa={dataNovaTarefa}

@@ -6,6 +6,7 @@ import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa'
 
 import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 
+
 const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
@@ -59,6 +60,21 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
                                 </div>
                             </div>
                             <span className={styles.spanBotoesAttDel}>
+                                {tarefa.status === 'pendente' && (
+                                    <button
+                                        className={styles.botaoConcluirTarefa}
+                                    >
+                                        Marcar como concluída
+                                    </button>
+                                )}
+
+                                {tarefa.status === 'concluida' && (
+                                    <button
+                                        className={styles.botaoConcluirTarefa}
+                                    >
+                                        Desmarcar como concluída
+                                    </button>
+                                )}
                                 <button className={styles.botoesAttDel} onClick={() => {
                                     abrirModalDeAtualizacao(index);
                                 }}>

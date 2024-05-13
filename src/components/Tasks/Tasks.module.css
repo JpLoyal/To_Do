@@ -25,6 +25,12 @@
     gap: 3px;
 }
 
+.botaoConcluirTarefa {
+    font-size: 10px;
+    padding: 8px;
+    margin-right: 10px;
+}
+
 .botoesAttDel {
     background-color: var(--branco);
     color: black;
