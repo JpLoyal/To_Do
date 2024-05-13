@@ -34,7 +34,13 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
         setModalExcluirIsOpen(true);
     };
 
-    const tarefasFiltradas = tasks.filter(tarefa => {
+    const tarefasOrdenadas = tasks.slice().sort((a, b) => {
+        const dataHoraA = new Date(`${a.data}T${a.horario}`);
+        const dataHoraB = new Date(`${b.data}T${b.horario}`);
+        return dataHoraA - dataHoraB;
+    });
+
+    const tarefasFiltradas = tarefasOrdenadas.filter(tarefa => {
         if (filtroTarefas === 'todas') {
             return true; // Retorna todas as tarefas
         } else if (filtroTarefas === 'pendente') {
