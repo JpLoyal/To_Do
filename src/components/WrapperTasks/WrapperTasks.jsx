@@ -82,6 +82,7 @@ const WrapperTasks = () => {
         
             <Tasks
                 tasks={tasks}
+                setTasks={setTasks}
                 atualizarTarefa={atualizarTarefa}
                 removerTarefa={removerTarefa}
                 filtroTarefas={filtroTarefas}

@@ -7,7 +7,7 @@ import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa'
 import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 
 
-const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
+const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
     const [indexDaTarefaASerAtualizada, setIndexDaTarefaASerAtualizada] = useState(null);
@@ -62,6 +62,17 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
                             <span className={styles.spanBotoesAttDel}>
                                 {tarefa.status === 'pendente' && (
                                     <button
+                                        onClick={() => {
+                                            const tarefaConcluida = tarefa
+                                            const todasAsTarefas = [...tasks];
+                                            todasAsTarefas.forEach((tarefa) => {
+                                                if (tarefa.id === tarefaConcluida.id) {
+                                                    tarefa.status = 'concluida';
+                                                    setTasks(todasAsTarefas);
+                                                }
+                                            })
+
+                                        }}
                                         className={styles.botaoConcluirTarefa}
                                     >
                                         Marcar como concluída
@@ -71,7 +82,19 @@ const Tasks = ({ tasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
                                 {tarefa.status === 'concluida' && (
                                     <button
                                         className={styles.botaoConcluirTarefa}
+                                        onClick={() => {
+                                            const tarefaDesconcluida = tarefa
+                                            const todasAsTarefas = [...tasks];
+                                            todasAsTarefas.forEach((tarefa) => {
+                                                if (tarefa.id === tarefaDesconcluida.id) {
+                                                    tarefa.status = 'pendente';
+                                                    setTasks(todasAsTarefas);
+                                                }
+                                            })
+
+                                        }}                                        
                                     >
+                                        
                                         Desmarcar como concluída
                                     </button>
                                 )}
