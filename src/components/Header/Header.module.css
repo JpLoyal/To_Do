@@ -27,3 +27,15 @@
 .botoesLoginSub {
 
 }
+
+@media (max-width: 600px) {
+
+    .navbarHeader {
+        display: none;
+    }
+
+    .header {
+        justify-content: center;
+    }
+
+}

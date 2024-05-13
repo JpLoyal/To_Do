@@ -56,7 +56,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                 {tarefasFiltradas.map((tarefa, index)=>{
                     return (
                         <li key={index} className={styles.elementoListaTarefas}>
-                            <div>
+                            <div className={styles.containerTarefaDataHorario}>
                                 <div>
                                     {index + 1} - {tarefa.descricao}
                                 </div>

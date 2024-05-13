@@ -16,3 +16,21 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: 600px) {
+
+    .containerTasks {
+        width: 90%;
+        margin-top: 20px;
+    }
+
+    .tituloTarefa {
+        font-size: 25px;
+    }
+
+    .containerAddFiltrar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}

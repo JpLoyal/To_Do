@@ -9,7 +9,7 @@ html {
     font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-style: normal;
-    background-color: var(--branco);
+    background-color: var(--branco);    
     color: #272323;
 }
 
@@ -29,11 +29,6 @@ button:hover {
 }
 
 .estilosModals {
-    /* position: absolute;
-    top: 40px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px; */
     background-color: var(--branco);
     position: relative;
     height: 50%;
