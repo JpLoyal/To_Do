@@ -28,7 +28,9 @@ const ModalAdicionarTarefa = ({
                     adicionarTarefa();
                     fecharModalDeCriacao();
                 }}>
+                    <label htmlFor="descricao">Tarefa:</label>
                     <input
+                        id='descricao'
                         type="text"
                         value={descricaoNovaTarefa.descricao}
                         onChange={(evento)=>setDescricaoNovaTarefa(evento.target.value)}
@@ -36,14 +38,18 @@ const ModalAdicionarTarefa = ({
                         required
                     />
 
+                    <label htmlFor="data">Data:</label>
                     <input
+                        id='data'
                         type="date"
                         placeholder="Data"
                         onChange={(evento)=>setDataNovaTarefa(evento.target.value)}
                         required
                     />
 
+                    <label htmlFor="horario">Hora:</label>
                     <input
+                        id='horario'
                         type="time"
                         placeholder="Hora"
                         onChange={(evento)=>setHorarioNovaTarefa(evento.target.value)}

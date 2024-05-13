@@ -16,7 +16,7 @@ const ModalExcluirTarefa = ({
                 className={'estilosModals'}
         >
             <section className={styles.containerModalExcluir}>
-                <h4>Tem certeza que deseja excluir a seguinte tarefa:</h4>
+                <h4 className={styles.tituloExcluir}>Tem certeza que deseja excluir a seguinte tarefa:</h4>
 
                 {indexDaTarefaASerExcluida !== null && tasks[indexDaTarefaASerExcluida] && (
                     <p>{tasks[indexDaTarefaASerExcluida].descricao}</p>
