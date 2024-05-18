@@ -1,14 +1,15 @@
 import styles from './WrapperTasks.module.css';
 import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
+import config from '../../config';
 
 import ModalAdicionarTarefa from '../Modals/ModalAdicionarTarefa/ModalAdicionarTarefa';
 import FiltroTarefas from '../FiltroTarefas/FiltroTarefas';
 import tarefas from '../../data/tarefas';
 
 const WrapperTasks = () => {
-    const [tasks, setTasks] = useState(tarefas);
+    const [tasks, setTasks] = useState([]);
 
     const [descricaoNovaTarefa, setDescricaoNovaTarefa] = useState('');
     const [dataNovaTarefa, setDataNovaTarefa] = useState('');
@@ -19,22 +20,43 @@ const WrapperTasks = () => {
 
     const [filtroTarefas, setFiltroTarefas] = useState('pendente');
  
-    function adicionarTarefa(){
+    async function adicionarTarefa() {
         const novaTarefa = {
             id: uuidv4(),
             descricao: descricaoNovaTarefa,
             data: dataNovaTarefa,
             horario: horarioNovaTarefa,
             status: statusNovaTarefa,
+        };
+    
+        try {
+            const response = await fetch(`${config.API_URL}/tarefas/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(novaTarefa),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar a tarefa');
+            }
+    
+            const data = await response.json();
+            // console.log('Tarefa adicionada com sucesso:', data);
+            setTasks([...tasks, novaTarefa]);
+        } catch (error) {
+            console.error('Erro ao adicionar a tarefa:', error);
         }
-        setTasks([...tasks, novaTarefa]);
+    
         setDescricaoNovaTarefa('');
         setDataNovaTarefa('');
         setHorarioNovaTarefa('');
         setStatusNovaTarefa('');
-    };
+    }
+    
 
-    function removerTarefa(index, tarefaASerExcluida){
+    async function removerTarefa(index, tarefaASerExcluida){
         const novasTarefas = [...tasks];
 
         novasTarefas.forEach((tarefa, index)=>{
@@ -43,20 +65,52 @@ const WrapperTasks = () => {
             }
         })
 
-        // novasTarefas.splice(index, 1);
-        setTasks(novasTarefas);
+        try {
+            await fetch(`${config.API_URL}/tarefas/${tarefaASerExcluida.id}/`, {
+                method: 'DELETE',
+            });
+            setTasks(novasTarefas);
+            
+        } catch (error) {
+            console.error('Erro ao excluir a tarefa:', error);
+        }
+
     };
 
-    function atualizarTarefa(index, tarefaAtualizada){
+    async function atualizarTarefa(index, tarefaAtualizada){
         const novasTarefas = [...tasks];
 
-        novasTarefas.forEach((tarefa, index)=>{
-            console.log(tarefa.id === tarefaAtualizada.id)
+        console.log(tarefaAtualizada)
+
+        novasTarefas.forEach((tarefa, i)=>{
             if (tarefa.id === tarefaAtualizada.id) {
-                novasTarefas[index] = tarefaAtualizada
+                novasTarefas[i] = tarefaAtualizada
             } 
         })
-        setTasks(novasTarefas)
+
+        const idDaTarefaAtualizada = tarefaAtualizada.id;
+        console.log('ID da tarefa atualizada:', idDaTarefaAtualizada);
+
+        try {
+            const response = await fetch(`${config.API_URL}/tarefas/${idDaTarefaAtualizada}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(tarefaAtualizada),
+            });
+        
+            if (!response.ok) {
+                throw new Error('Erro ao atualizar a tarefa');
+            }
+        
+            const data = await response.json();
+            console.log('Tarefa atualizada com sucesso:', data);
+            setTasks(novasTarefas)
+
+        } catch (error) {
+            console.error('Erro ao atualizar a tarefa:', error);
+        }
     };
 
     function abrirModalDeCriacao(){

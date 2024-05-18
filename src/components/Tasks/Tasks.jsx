@@ -1,5 +1,6 @@
 import styles from './Tasks.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import config from '../../config';
 
 import ModalAtualizarTarefa from '../Modals/ModalAtualizarTarefa/ModalAtualizarTarefa';
 import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa';
@@ -33,6 +34,70 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
         setIndexDaTarefaASerExcluida(index);
         setModalExcluirIsOpen(true);
     };
+
+    const marcarComoConcluida = async (tarefa) => {
+        try {
+            const response = await fetch(`${config.API_URL}/tarefas/${tarefa.id}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: 'concluida' }),
+            });
+            if (!response.ok) {
+                throw new Error('Erro ao marcar a tarefa como concluída');
+            }
+            const todasAsTarefas = tasks.map(t =>
+                t.id === tarefa.id ? { ...t, status: 'concluida' } : t
+            );
+            setTasks(todasAsTarefas);
+        } catch (error) {
+            console.error('Erro ao marcar a tarefa como concluída:', error);
+        }
+    }
+
+    const desmarcarComoConcluida = (tarefaDesconcluida) => {
+        const todasAsTarefas = [...tasks];
+        todasAsTarefas.forEach((tarefa) => {
+            if (tarefa.id === tarefaDesconcluida.id) {
+                tarefa.status = 'pendente';
+                setTasks(todasAsTarefas);
+    
+                fetch(`${config.API_URL}/tarefas/${tarefaDesconcluida.id}/`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: 'pendente' }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao atualizar o status da tarefa');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Status da tarefa atualizado para pendente:', data);
+                })
+                .catch(error => {
+                    console.error('Erro ao atualizar o status da tarefa:', error);
+                });
+            }
+        });
+    };
+
+    useEffect(()=>{
+        const fetchTarefas = async () => {
+            try {
+                const response = await fetch(`${config.API_URL}/tarefas/`);
+                const data = await response.json();
+                setTasks(data);
+            } catch (error) {
+                console.error('Erro ao buscar tarefas:', error);
+            }
+        }
+        fetchTarefas();
+    }, []);
 
     const tarefasOrdenadas = tasks.slice().sort((a, b) => {
         const dataHoraA = new Date(`${a.data}T${a.horario}`);
@@ -68,17 +133,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                             <span className={styles.spanBotoesAttDel}>
                                 {tarefa.status === 'pendente' && (
                                     <button
-                                        onClick={() => {
-                                            const tarefaConcluida = tarefa
-                                            const todasAsTarefas = [...tasks];
-                                            todasAsTarefas.forEach((tarefa) => {
-                                                if (tarefa.id === tarefaConcluida.id) {
-                                                    tarefa.status = 'concluida';
-                                                    setTasks(todasAsTarefas);
-                                                }
-                                            })
-
-                                        }}
+                                        onClick={() => marcarComoConcluida(tarefa)}
                                         className={styles.botaoConcluirTarefa}
                                     >
                                         Marcar como concluída
@@ -88,24 +143,13 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                                 {tarefa.status === 'concluida' && (
                                     <button
                                         className={styles.botaoConcluirTarefa}
-                                        onClick={() => {
-                                            const tarefaDesconcluida = tarefa
-                                            const todasAsTarefas = [...tasks];
-                                            todasAsTarefas.forEach((tarefa) => {
-                                                if (tarefa.id === tarefaDesconcluida.id) {
-                                                    tarefa.status = 'pendente';
-                                                    setTasks(todasAsTarefas);
-                                                }
-                                            })
-
-                                        }}                                        
+                                        onClick={() => desmarcarComoConcluida(tarefa)}                                 
                                     >
                                         
                                         Desmarcar como concluída
                                     </button>
                                 )}
                                 <button className={styles.botoesAttDel} onClick={() => {
-                                    console.log(index)
                                     abrirModalDeAtualizacao(index);
                                 }}>
                                     <FaPenAlt />

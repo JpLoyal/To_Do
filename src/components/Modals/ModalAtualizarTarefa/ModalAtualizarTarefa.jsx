@@ -58,6 +58,7 @@ const ModalAtualizarTarefa = ({
                         horario: horarioAtualizacaoTarefa,
                         status: statusAtualizacaoTarefa,
                     }
+                    
                     atualizarTarefa(indexDaTarefaASerAtualizada, objTarefaAtualizada)
                     
                 }}>
