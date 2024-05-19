@@ -43,16 +43,18 @@ const WrapperTasks = () => {
             }
     
             const data = await response.json();
-            // console.log('Tarefa adicionada com sucesso:', data);
-            setTasks([...tasks, novaTarefa]);
+            console.log('Tarefa adicionada com sucesso:', data);
+
+            setTasks((prevTasks) => [...prevTasks, novaTarefa]);
+
+            setDescricaoNovaTarefa('');
+            setDataNovaTarefa('');
+            setHorarioNovaTarefa('');
+            setStatusNovaTarefa('');
+
         } catch (error) {
             console.error('Erro ao adicionar a tarefa:', error);
         }
-    
-        setDescricaoNovaTarefa('');
-        setDataNovaTarefa('');
-        setHorarioNovaTarefa('');
-        setStatusNovaTarefa('');
     }
     
 
@@ -89,7 +91,11 @@ const WrapperTasks = () => {
         })
 
         const idDaTarefaAtualizada = tarefaAtualizada.id;
-        console.log('ID da tarefa atualizada:', idDaTarefaAtualizada);
+        console.log('ID da tarefa que vai ser atualizada:', idDaTarefaAtualizada);
+
+
+        
+        // O erro acontece a partir daqui
 
         try {
             const response = await fetch(`${config.API_URL}/tarefas/${idDaTarefaAtualizada}/`, {

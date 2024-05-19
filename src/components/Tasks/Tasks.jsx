@@ -11,18 +11,17 @@ import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
-    const [indexDaTarefaASerAtualizada, setIndexDaTarefaASerAtualizada] = useState(null);
-    const [tarefaAtualizadaNoInputDoModal, setTarefaAtualizadaNoInputDoModal] = useState('');
+    const [tarefaASerAtualizada, setTarefaASerAtualizada] = useState(null)
 
     const [modalExcluirIsOpen, setModalExcluirIsOpen] = useState(false);
-    const [indexDaTarefaASerExcluida, setIndexDaTarefaASerExcluida] = useState(null);
+    const [tarefaASerExcluida, setTarefaASerExcluida] = useState(null);
 
     function fecharModalDeAtualizacao(){
         setModalAtualizarIsOpen(false);
     };
 
-    function abrirModalDeAtualizacao(index){
-        setIndexDaTarefaASerAtualizada(index);
+    function abrirModalDeAtualizacao(tarefa){
+        setTarefaASerAtualizada(tarefa);
         setModalAtualizarIsOpen(true);
     };
 
@@ -30,8 +29,8 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
         setModalExcluirIsOpen(false);
     };
 
-    function abrirModalDeExclusao(index){
-        setIndexDaTarefaASerExcluida(index);
+    function abrirModalDeExclusao(tarefa){
+        setTarefaASerExcluida(tarefa);
         setModalExcluirIsOpen(true);
     };
 
@@ -150,12 +149,12 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                                     </button>
                                 )}
                                 <button className={styles.botoesAttDel} onClick={() => {
-                                    abrirModalDeAtualizacao(index);
+                                    abrirModalDeAtualizacao(tarefa);
                                 }}>
                                     <FaPenAlt />
                                 </button>
                                 <button className={`${styles.botoesAttDel} ${styles.botaoDel}`} onClick={() => {
-                                    abrirModalDeExclusao(index)
+                                    abrirModalDeExclusao(tarefa)
                                 }}>
                                     <FaTrash />
                                 </button>
@@ -166,25 +165,13 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
             </ul>
 
             <ModalAtualizarTarefa 
-                tasks={tasks}
-                tarefasFiltradas={tarefasFiltradas}
-                atualizarTarefa={atualizarTarefa}
                 modalAtualizarIsOpen={modalAtualizarIsOpen}
                 fecharModalDeAtualizacao={fecharModalDeAtualizacao}
-                indexDaTarefaASerAtualizada={indexDaTarefaASerAtualizada}
-                tarefaAtualizadaNoInputDoModal={tarefaAtualizadaNoInputDoModal}
-                setTarefaAtualizadaNoInputDoModal={setTarefaAtualizadaNoInputDoModal}
-                setModalAtualizarIsOpen={setModalAtualizarIsOpen}
             />
 
             <ModalExcluirTarefa
-                tasks={tasks}
-                tarefasFiltradas={tarefasFiltradas}
                 modalExcluirIsOpen={modalExcluirIsOpen}
                 fecharModalDeExclusao={fecharModalDeExclusao}
-                removerTarefa={removerTarefa}
-                indexDaTarefaASerExcluida={indexDaTarefaASerExcluida}
-                setModalExcluirIsOpen={setModalExcluirIsOpen}
             />
         </>
     )
