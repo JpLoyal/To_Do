@@ -8,7 +8,7 @@ import ModalExcluirTarefa from '../Modals/ModalExcluirTarefa/ModalExcluirTarefa'
 import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 
 
-const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas }) => {
+const Tasks = ({tasks, setTasks, filtroTarefas}) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
     const [tarefaASerAtualizada, setTarefaASerAtualizada] = useState(null)
@@ -148,13 +148,13 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                                 )}
                                 <button className={styles.botoesAttDel} onClick={() => {
                                     setTarefaASerAtualizada(tarefa);
-                                    abrirModalDeAtualizacao(tarefa);
+                                    abrirModalDeAtualizacao();
                                 }}>
                                     <FaPenAlt />
                                 </button>
                                 <button className={`${styles.botoesAttDel} ${styles.botaoDel}`} onClick={() => {
-                                    abrirModalDeExclusao(tarefa);
                                     setTarefaASerExcluida(tarefa)
+                                    abrirModalDeExclusao();
                                 }}>
                                     <FaTrash />
                                 </button>
@@ -165,12 +165,16 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
             </ul>
 
             <ModalAtualizarTarefa 
+                tasks={tasks}
+                setTasks={setTasks}
                 modalAtualizarIsOpen={modalAtualizarIsOpen}
-                fecharModalDeAtualizacao={fecharModalDeAtualizacao}
+                setModalAtualizarIsOpen={setModalAtualizarIsOpen}
                 tarefaASerAtualizada={tarefaASerAtualizada}
             />
 
             <ModalExcluirTarefa
+                tasks={tasks}
+                setTasks={setTasks}
                 modalExcluirIsOpen={modalExcluirIsOpen}
                 fecharModalDeExclusao={fecharModalDeExclusao}
                 tarefaASerExcluida={tarefaASerExcluida}
