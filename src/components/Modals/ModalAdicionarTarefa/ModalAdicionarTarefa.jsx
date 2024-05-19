@@ -8,12 +8,8 @@ const ModalAdicionarTarefa = ({
     adicionarTarefa,
     descricaoNovaTarefa,
     setDescricaoNovaTarefa,
-    dataNovaTarefa,
     setDataNovaTarefa,
-    horarioNovaTarefa,
-    setHorarioNovaTarefa,
-    statusNovaTarefa,
-    setStatusNovaTarefa,
+    setHorarioNovaTarefa
 }) => { 
 
     return (

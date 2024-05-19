@@ -1,12 +1,11 @@
 import styles from './WrapperTasks.module.css';
 import { useState } from 'react';
 import Tasks from '../Tasks/Tasks';
-import { v4 as uuidv4 } from 'uuid';
 import config from '../../config';
 
 import ModalAdicionarTarefa from '../Modals/ModalAdicionarTarefa/ModalAdicionarTarefa';
 import FiltroTarefas from '../FiltroTarefas/FiltroTarefas';
-import tarefas from '../../data/tarefas';
+
 
 const WrapperTasks = () => {
     const [tasks, setTasks] = useState([]);
@@ -14,7 +13,6 @@ const WrapperTasks = () => {
     const [descricaoNovaTarefa, setDescricaoNovaTarefa] = useState('');
     const [dataNovaTarefa, setDataNovaTarefa] = useState('');
     const [horarioNovaTarefa, setHorarioNovaTarefa] = useState('');
-    const [statusNovaTarefa, setStatusNovaTarefa] = useState('pendente');
 
     const [modalAdicionarIsOpen, setModalAdicionarIsOpen] = useState(false);
 
@@ -22,11 +20,9 @@ const WrapperTasks = () => {
  
     async function adicionarTarefa() {
         const novaTarefa = {
-            id: uuidv4(),
             descricao: descricaoNovaTarefa,
             data: dataNovaTarefa,
             horario: horarioNovaTarefa,
-            status: statusNovaTarefa,
         };
     
         try {
@@ -43,14 +39,14 @@ const WrapperTasks = () => {
             }
     
             const data = await response.json();
-            console.log('Tarefa adicionada com sucesso:', data);
 
             setTasks((prevTasks) => [...prevTasks, novaTarefa]);
 
             setDescricaoNovaTarefa('');
             setDataNovaTarefa('');
             setHorarioNovaTarefa('');
-            setStatusNovaTarefa('');
+
+            console.log('Sucesso ao criar a seguinte tarefa:', data)
 
         } catch (error) {
             console.error('Erro ao adicionar a tarefa:', error);
@@ -83,12 +79,8 @@ const WrapperTasks = () => {
                 adicionarTarefa={adicionarTarefa}
                 descricaoNovaTarefa={descricaoNovaTarefa}
                 setDescricaoNovaTarefa={setDescricaoNovaTarefa}
-                dataNovaTarefa={dataNovaTarefa}
                 setDataNovaTarefa={setDataNovaTarefa}
-                horarioNovaTarefa={horarioNovaTarefa}
                 setHorarioNovaTarefa={setHorarioNovaTarefa}
-                statusNovaTarefa={statusNovaTarefa}
-                setStatusNovaTarefa={setStatusNovaTarefa}
             />
         
             <Tasks

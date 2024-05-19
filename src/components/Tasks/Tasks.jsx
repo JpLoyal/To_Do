@@ -11,7 +11,7 @@ import { FaPenAlt, FaTrash, FaClock, FaCalendar } from "react-icons/fa";
 const Tasks = ({tasks, setTasks, filtroTarefas}) => {
 
     const [modalAtualizarIsOpen, setModalAtualizarIsOpen] = useState(false);
-    const [tarefaASerAtualizada, setTarefaASerAtualizada] = useState(null)
+    const [tarefaASerAtualizada, setTarefaASerAtualizada] = useState(null);
 
     const [modalExcluirIsOpen, setModalExcluirIsOpen] = useState(false);
     const [tarefaASerExcluida, setTarefaASerExcluida] = useState(null);
@@ -44,57 +44,68 @@ const Tasks = ({tasks, setTasks, filtroTarefas}) => {
             if (!response.ok) {
                 throw new Error('Erro ao marcar a tarefa como concluída');
             }
+            
+            const data = await response.json();
+
             const todasAsTarefas = tasks.map(t =>
                 t.id === tarefa.id ? { ...t, status: 'concluida' } : t
             );
             setTasks(todasAsTarefas);
+
+            console.log('Sucesso em atualizar o status da seguinte tarefa:', data)
+
         } catch (error) {
             console.error('Erro ao marcar a tarefa como concluída:', error);
         }
     }
 
-    const desmarcarComoConcluida = (tarefaDesconcluida) => {
+    const desmarcarComoConcluida = async (tarefaDesconcluida) => {
         const todasAsTarefas = [...tasks];
-        todasAsTarefas.forEach((tarefa) => {
+        todasAsTarefas.forEach(async (tarefa) => {
             if (tarefa.id === tarefaDesconcluida.id) {
                 tarefa.status = 'pendente';
                 setTasks(todasAsTarefas);
     
-                fetch(`${config.API_URL}/tarefas/${tarefaDesconcluida.id}/`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ status: 'pendente' }),
-                })
-                .then(response => {
+                try {
+                    const response = await fetch(`${config.API_URL}/tarefas/${tarefaDesconcluida.id}/`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ status: 'pendente' }),
+                    });
+    
                     if (!response.ok) {
                         throw new Error('Erro ao atualizar o status da tarefa');
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Status da tarefa atualizado para pendente:', data);
-                })
-                .catch(error => {
+    
+                    const data = await response.json();
+
+                    console.log('Sucesso ao atualizar o status da seguinte tarefa:', data);
+
+                } catch (error) {
                     console.error('Erro ao atualizar o status da tarefa:', error);
-                });
+                }
             }
         });
     };
+    
+
 
     useEffect(()=>{
         const fetchTarefas = async () => {
             try {
                 const response = await fetch(`${config.API_URL}/tarefas/`);
                 const data = await response.json();
-                setTasks(data);
+                if (JSON.stringify(data) !== JSON.stringify(tasks)) {
+                    setTasks(data);
+                }
             } catch (error) {
                 console.error('Erro ao buscar tarefas:', error);
             }
         }
         fetchTarefas();
-    }, []);
+    }, [tasks]);
 
     const tarefasOrdenadas = tasks.slice().sort((a, b) => {
         const dataHoraA = new Date(`${a.data}T${a.horario}`);
@@ -169,6 +180,7 @@ const Tasks = ({tasks, setTasks, filtroTarefas}) => {
                 setTasks={setTasks}
                 modalAtualizarIsOpen={modalAtualizarIsOpen}
                 setModalAtualizarIsOpen={setModalAtualizarIsOpen}
+                fecharModalDeAtualizacao={fecharModalDeAtualizacao}
                 tarefaASerAtualizada={tarefaASerAtualizada}
             />
 

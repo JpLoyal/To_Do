@@ -46,7 +46,7 @@ const ModalAtualizarTarefa = ({
             const data = await response.json();
             console.log('Tarefa atualizada com sucesso:', data);
             setTasks(novasTarefas)
-            setModalAtualizarIsOpen(false)
+            fecharModalDeAtualizacao()
 
         } catch (error) {
             console.error('Erro ao atualizar a tarefa:', error);
