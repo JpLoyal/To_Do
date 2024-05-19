@@ -20,7 +20,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
         setModalAtualizarIsOpen(false);
     };
 
-    function abrirModalDeAtualizacao(tarefa){
+    function abrirModalDeAtualizacao(){
         setModalAtualizarIsOpen(true);
     };
 
@@ -28,7 +28,7 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
         setModalExcluirIsOpen(false);
     };
 
-    function abrirModalDeExclusao(tarefa){
+    function abrirModalDeExclusao(){
         setModalExcluirIsOpen(true);
     };
 

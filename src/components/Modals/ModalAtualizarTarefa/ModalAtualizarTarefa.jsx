@@ -8,6 +8,17 @@ const ModalAtualizarTarefa = ({
     tarefaASerAtualizada
 }) => {
 
+    const [descricaoNoModalDeAtualizacao, setDescricaoNoModalDeAtualizacao] = useState('');
+    const [dataNoModalDeAtualizacao, setDataNoModalDeAtualizacao] = useState('');
+    const [horarioNoModalDeAtualizacao, setHorarioNoModalDeAtualizacao] = useState('');
+    
+    useEffect(() => {
+        if (tarefaASerAtualizada) {
+            setDescricaoNoModalDeAtualizacao(tarefaASerAtualizada.descricao);
+            setDataNoModalDeAtualizacao(tarefaASerAtualizada.data);
+            setHorarioNoModalDeAtualizacao(tarefaASerAtualizada.horario);
+        }
+    }, [tarefaASerAtualizada]);
 
     return (
         <ReactModal
@@ -25,22 +36,28 @@ const ModalAtualizarTarefa = ({
                 <form>
                     <input
                         type='text'
-                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.descricao}
-                        // onChange={}
+                        value={descricaoNoModalDeAtualizacao}
+                        onChange={(evento) => {
+                            setDescricaoNoModalDeAtualizacao(evento.target.value);
+                        }}
                         required
                     />
 
                     <input
                         type="date"
-                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.data}
-                        // onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
+                        value={dataNoModalDeAtualizacao}
+                        onChange={(evento) => {
+                            setDataNoModalDeAtualizacao(evento.target.value);
+                        }}
                         required
                     />
 
                     <input
                         type='time'
-                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.horario}
-                        // onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
+                        value={horarioNoModalDeAtualizacao}
+                        onChange={(evento) => {
+                            setHorarioNoModalDeAtualizacao(evento.target.value);
+                        }}
                         required
                     />
 
