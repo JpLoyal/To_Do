@@ -21,7 +21,6 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
     };
 
     function abrirModalDeAtualizacao(tarefa){
-        setTarefaASerAtualizada(tarefa);
         setModalAtualizarIsOpen(true);
     };
 
@@ -30,7 +29,6 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
     };
 
     function abrirModalDeExclusao(tarefa){
-        setTarefaASerExcluida(tarefa);
         setModalExcluirIsOpen(true);
     };
 
@@ -149,12 +147,14 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
                                     </button>
                                 )}
                                 <button className={styles.botoesAttDel} onClick={() => {
+                                    setTarefaASerAtualizada(tarefa);
                                     abrirModalDeAtualizacao(tarefa);
                                 }}>
                                     <FaPenAlt />
                                 </button>
                                 <button className={`${styles.botoesAttDel} ${styles.botaoDel}`} onClick={() => {
-                                    abrirModalDeExclusao(tarefa)
+                                    abrirModalDeExclusao(tarefa);
+                                    setTarefaASerExcluida(tarefa)
                                 }}>
                                     <FaTrash />
                                 </button>
@@ -167,11 +167,13 @@ const Tasks = ({ tasks, setTasks, atualizarTarefa, removerTarefa, filtroTarefas 
             <ModalAtualizarTarefa 
                 modalAtualizarIsOpen={modalAtualizarIsOpen}
                 fecharModalDeAtualizacao={fecharModalDeAtualizacao}
+                tarefaASerAtualizada={tarefaASerAtualizada}
             />
 
             <ModalExcluirTarefa
                 modalExcluirIsOpen={modalExcluirIsOpen}
                 fecharModalDeExclusao={fecharModalDeExclusao}
+                tarefaASerExcluida={tarefaASerExcluida}
             />
         </>
     )

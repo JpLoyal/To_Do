@@ -5,6 +5,7 @@ import styles from './ModalAtualizarTarefa.module.css';
 const ModalAtualizarTarefa = ({
     modalAtualizarIsOpen,
     fecharModalDeAtualizacao,
+    tarefaASerAtualizada
 }) => {
 
 
@@ -17,26 +18,28 @@ const ModalAtualizarTarefa = ({
             <section className={styles.containerModalAtualizar}>
                 <h4>Tarefa a ser atualizada:</h4>
 
+                <p>{tarefaASerAtualizada !== null && tarefaASerAtualizada.descricao}</p>
+
                 <h4>Nova Tarefa:</h4>
 
                 <form>
                     <input
                         type='text'
-                        value={'teste'}
+                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.descricao}
                         // onChange={}
                         required
                     />
 
                     <input
                         type="date"
-                        value={'teste'}
+                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.data}
                         // onChange={(evento) => setDataAtualizacaoTarefa(evento.target.value)}
                         required
                     />
 
                     <input
                         type='time'
-                        value={'teste'}
+                        value={tarefaASerAtualizada !== null && tarefaASerAtualizada.horario}
                         // onChange={(evento) => setHorarioAtualizacaoTarefa(evento.target.value)}
                         required
                     />
