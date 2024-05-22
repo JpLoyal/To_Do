@@ -9,7 +9,7 @@ const CadastroPage = () => {
       <FormLoginCadastro 
         title={'Cadastrar-se'}
         buttonText={'Realizar Cadastro'}
-        type={'password'}
+        isCadastro={true}
       />
     </div>
   )

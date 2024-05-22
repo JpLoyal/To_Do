@@ -7,7 +7,6 @@ const LoginPage = () => {
       <FormLoginCadastro 
         title={'Fazer Login'}
         buttonText={'Entrar'}
-        type={'password'}
       />
     </div>
   );
