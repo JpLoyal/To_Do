@@ -24,6 +24,11 @@ button {
     box-shadow: 0 0 0 2px transparent;
 }
 
+a {
+    color: var(--branco);
+    text-decoration: none;
+}
+
 button:hover {
     box-shadow: 0 0 0 2px #63AFFF;
 }

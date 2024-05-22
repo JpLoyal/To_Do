@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -13,8 +14,8 @@ const Header = () => {
         </ul>
       </nav>
       <section className={styles.containerBotoes}>
-        <button className={styles.botoesLoginSub}>Entrar</button>
-        <button className={styles.botoesLoginSub}>Cadastrar-se</button>
+        <Link to='/login'><button className={styles.botoesLoginSub}>Entrar</button></Link>
+        <Link to='/cadastro'><button className={styles.botoesLoginSub}>Cadastrar-se</button></Link>
       </section>
     </header>
 )};

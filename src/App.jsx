@@ -1,20 +1,28 @@
 import 'normalize.css';
 import './index.css';
 
-import Header from './components/Header/Header';
-import WrapperTasks from './components/WrapperTasks/WrapperTasks';
-import Footer from './components/Footer/Footer';
-
 import ReactModal from 'react-modal';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import HomePage from './pages/HomePage/HomePage';
+import LoginPage from './pages/LoginPage/LoginPage';
+import BasePage from './pages/BasePage/BasePage';
+import CadastroPage from './pages/CadastroPage/CadastroPage';
 
 ReactModal.setAppElement('#root');
 
 function App() {
   return (
     <>
-      <Header />
-      <WrapperTasks />
-      <Footer />
+      <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<BasePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/cadastro' element={<CadastroPage />} />
+            <Route path='/home' element={<HomePage />} />
+          </Routes> 
+      </BrowserRouter>
     </>
   )
 }
