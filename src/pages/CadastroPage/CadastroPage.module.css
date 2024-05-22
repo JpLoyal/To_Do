@@ -1,0 +1,5 @@
+.mainContainerCadastro {
+    background-color: var(--azulClaro);
+    min-height: 100vh;
+    position: relative
+}

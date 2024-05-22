@@ -1,10 +1,20 @@
+import styles from './CadastroPage.module.css'
+
+import FormLoginCadastro from '../../components/FormLoginCadastro/FormLoginCadastro'
+
 
 const CadastroPage = () => {
   return (
-    <div>
-      Essa é a página de Cadastro
+    <div className={styles.mainContainerCadastro}>
+      <FormLoginCadastro 
+        title={'Cadastrar-se'}
+        buttonText={'Realizar Cadastro'}
+        type={'password'}
+      />
     </div>
   )
 }
 
-export default CadastroPage
+export default CadastroPage;
+
+
