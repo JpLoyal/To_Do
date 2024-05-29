@@ -1,29 +1,82 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './FormLoginCadastro.module.css';
 
 const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [re_password, setRe_password] = useState('');
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleRe_passwordChange = (e) => {
+    setRe_password(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({ username, email, password, re_password });
+  };
+
   return (
-    <form className={styles.formLogin} onSubmit={onSubmit}>
+    <form className={styles.formLogin} onSubmit={handleSubmit}>
       <h1>{title}</h1>
       <div className={styles.containerLabelInput}>
         <label htmlFor="username">Usuário:</label>
-        <input type="text" id="username" name="username" />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          onChange={handleUsernameChange}
+          required/>
       </div>
+
+      {isCadastro && (
+        <>
+          <div className={styles.containerLabelInput}>
+            <label htmlFor="email">Email:</label>
+            <input 
+              type="text"
+              id="email"
+              name="email"
+              onChange={handleEmailChange}
+              required/>
+          </div>
+        </>
+      )}
+
       <div className={styles.containerLabelInput}>
         <label htmlFor="password">Senha:</label>
-        <input type="password" id="password" name="password" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          onChange={handlePasswordChange}
+          required/>
       </div>
 
       {isCadastro && (
         <>
           <div className={styles.containerLabelInput}>
             <label htmlFor="againPassword">Repita a senha:</label>
-            <input type="password" id="againPassword" name="againPassword" />
+            <input
+            type="password"
+            id="againPassword"
+            name="againPassword"
+            onChange={handleRe_passwordChange}
+            required/>
           </div>
-          <div className={styles.containerLabelInput}>
-            <label htmlFor="email">Email:</label>
-            <input type="text" id="email" name="email" />
-        </div>
         </>
       )}
 
