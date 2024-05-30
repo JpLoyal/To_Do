@@ -7,6 +7,7 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [re_password, setRe_password] = useState('');
+  const [error, setError] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -18,14 +19,30 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    if (isCadastro) {
+      validatePasswords(e.target.value, re_password);
+    }
   };
 
   const handleRe_passwordChange = (e) => {
     setRe_password(e.target.value);
+    validatePasswords(password, e.target.value);
+  };
+
+  const validatePasswords = (password, re_password) => {
+    if (password !== re_password) {
+      setError('As senhas não coincidem');
+    } else {
+      setError('');
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isCadastro && password !== re_password) {
+      setError('As senhas não coincidem');
+      return;
+    }
     onSubmit({ username, email, password, re_password });
   };
 
@@ -79,6 +96,8 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
           </div>
         </>
       )}
+
+      {error && <p className={styles.error}>{error}</p>}
 
       <button type="submit" className={styles.btnLogin}>{buttonText}</button>
     </form>

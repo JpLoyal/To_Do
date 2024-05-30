@@ -26,7 +26,6 @@ const CadastroPage = () => {
     
           const data = await response.json();
           console.log('Registro bem-sucedido:', data);
-          // Você pode adicionar mais lógica aqui, como redirecionar o usuário ou mostrar uma mensagem de sucesso
         } catch (error) {
           console.error('Erro:', error);
           alert('Erro ao registrar usuário. Por favor, tente novamente.');
