@@ -7,7 +7,6 @@ const IndexPage = () => {
   return (
     <>
         <Header />
-            
         <div className={styles.containerMain}>
             Essa é a página index
         </div>

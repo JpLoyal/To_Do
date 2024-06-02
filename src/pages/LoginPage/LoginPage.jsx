@@ -1,13 +1,11 @@
 import styles from './LoginPage.module.css';
 import FormLoginCadastro from '../../components/FormLoginCadastro/FormLoginCadastro';
 import config from '../../config';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const LoginPage = () => {
-  
-  const navigate = useNavigate()
+
   const { login } = useContext(AuthContext) 
 
   const onSubmit = async (formData) => {
@@ -30,8 +28,6 @@ const LoginPage = () => {
       
       const tokenDeAcesso = data.access;
       login(tokenDeAcesso);
-
-      navigate('/home')
 
     } catch (error) {
       console.error('Erro:', error);

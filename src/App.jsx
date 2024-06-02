@@ -16,16 +16,17 @@ ReactModal.setAppElement('#root');
 function App() {
   return (
     <>
-      <AuthProvider>
-        <BrowserRouter>
-            <Routes>
-              <Route path='/' element={<BasePage />} />
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/cadastro' element={<CadastroPage />} />
-              <Route path='/home' element={<HomePage />} />
-            </Routes> 
-        </BrowserRouter>
-      </AuthProvider>
+      
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path='/' element={<BasePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/cadastro' element={<CadastroPage />} />
+            <Route path='/home' element={<HomePage />} />
+          </Routes> 
+        </AuthProvider>
+      </BrowserRouter>
     </>
   )
 }
