@@ -38,6 +38,7 @@ const Tasks = ({tasks, setTasks, filtroTarefas}) => {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Adicionando o token de autenticação
                 },
                 body: JSON.stringify({ status: 'concluida' }),
             });
@@ -71,6 +72,7 @@ const Tasks = ({tasks, setTasks, filtroTarefas}) => {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Adicionando o token de autenticação
                         },
                         body: JSON.stringify({ status: 'pendente' }),
                     });
@@ -95,7 +97,15 @@ const Tasks = ({tasks, setTasks, filtroTarefas}) => {
     useEffect(()=>{
         const fetchTarefas = async () => {
             try {
-                const response = await fetch(`${config.API_URL}/tarefas/`);
+                const response = await fetch(`${config.API_URL}/tarefas/`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('token')}` // Adicionando o token de autenticação
+                }
+                });
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar tarefas');
+                }
                 const data = await response.json();
                 if (JSON.stringify(data) !== JSON.stringify(tasks)) {
                     setTasks(data);

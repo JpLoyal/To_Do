@@ -22,6 +22,10 @@ const ModalExcluirTarefa = ({
         try {
             await fetch(`${config.API_URL}/tarefas/${tarefaASerExcluida.id}/`, {
                 method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Inclui o token de autenticação no cabeçalho
+                },
             });
             setTasks(novasTarefas);
             

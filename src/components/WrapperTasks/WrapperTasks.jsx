@@ -30,6 +30,7 @@ const WrapperTasks = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Inclui o token de autenticação no cabeçalho
                 },
                 body: JSON.stringify(novaTarefa),
             });
