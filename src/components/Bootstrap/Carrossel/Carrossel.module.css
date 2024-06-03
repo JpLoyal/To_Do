@@ -1,0 +1,20 @@
+.customCarrosel {
+    max-width: 1200px;
+    margin: 16px auto 0 auto;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Proporção de 16:9 (altura = largura * 9/16) */
+  }
+
+  .imageContainer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Redimensiona a imagem para cobrir todo o contêiner, mantendo a proporção original */
+    border-radius: 10px;
+  }

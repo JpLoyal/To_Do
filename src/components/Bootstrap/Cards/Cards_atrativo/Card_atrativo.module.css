@@ -1,0 +1,6 @@
+.containerCardAtrativo {
+    text-align: center;
+    background-color: var(--azulClaro);
+    color: white;
+    margin-top: 20px;
+}

@@ -5,9 +5,15 @@
     background-color: var(--azulClaro);
 }
 
+.navbarHeader {
+    display: flex;
+    align-items: center;
+}
+
 .ulHeader {
     display: flex;
     gap: 10px;
+    margin-bottom: 0px !important;
 }
 
 .liHeader {
