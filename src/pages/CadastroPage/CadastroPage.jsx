@@ -37,7 +37,7 @@ const CadastroPage = () => {
     <div className={styles.mainContainerCadastro}>
       <FormLoginCadastro 
         title={'Cadastrar-se'}
-        buttonText={'Realizar Cadastro'}
+        buttonText={'Enviar'}
         isCadastro={true}
         onSubmit={onSubmit}
       />

@@ -15,7 +15,7 @@ function ControlledCarousel() {
         <div className={styles.imageContainer}>
           <img
               className="d-block w-100"
-              src="public/img/garoto_moreno_pensando.jpg"
+              src="/img/garoto_moreno_pensando.jpg"
               alt="First slide"
           />
         </div>
@@ -28,7 +28,7 @@ function ControlledCarousel() {
         <div className={styles.imageContainer}>
           <img
               className="d-block w-100"
-              src="public/img/mulher_pensando.png"
+              src="/img/mulher_pensando.png"
               alt="Second slide"
           />
         </div>
@@ -41,7 +41,7 @@ function ControlledCarousel() {
         <div className={styles.imageContainer}>
           <img
               className="d-block w-100"
-              src="public/img/pessoa_tentando_lembrar_de_algo.jpg"
+              src="/img/pessoa_tentando_lembrar_de_algo.jpg"
               alt="Third slide"
           />
         </div>

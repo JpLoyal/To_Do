@@ -8,6 +8,7 @@
     padding: 20px;
     background-color: var(--cinza);
     width: 50%;
+    max-width: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,7 +23,8 @@
 }
 
 .btnLogin {
-    width: 30%;
+    margin: 20px 0px;
+    width: 40%;
 }
 
 @media (max-width: 600px) {
