@@ -1,9 +1,12 @@
 import styles from './CadastroPage.module.css';
 import config from '../../config';
+import { useState } from 'react';
 
 import FormLoginCadastro from '../../components/FormLoginCadastro/FormLoginCadastro'
 
 const CadastroPage = () => {
+
+  const [error, setError] = useState(null);
 
   const onSubmit = async (formData) => {
     const { username, email, password, re_password } = formData;
@@ -22,7 +25,8 @@ const CadastroPage = () => {
     
           if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.detail || 'Erro ao registrar usuário');
+            setError(errorData);
+            throw new Error('Erro na solicitação');
           }
     
           const data = await response.json();
@@ -41,6 +45,7 @@ const CadastroPage = () => {
         buttonText={'Enviar'}
         isCadastro={true}
         onSubmit={onSubmit}
+        error={error}
       />
     </div>
   )

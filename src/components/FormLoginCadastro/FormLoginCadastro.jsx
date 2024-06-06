@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './FormLoginCadastro.module.css';
 
 import Alert from 'react-bootstrap/Alert';
 
-const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
+const FormComponent = ({ title, isCadastro, buttonText, onSubmit, error }) => {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [re_password, setRe_password] = useState('');
-  const [error, setError] = useState('');
+  const [formErrors, setFormErrors] = useState([]);
+  const [apiErrors, setApiErrors] = useState([]);
+
+  useEffect(() => {
+    // Limpa os erros ao receber um novo erro da API
+    if (error) {
+      const apiErrors = Object.values(error).flat();
+      setApiErrors(apiErrors);
+    }
+  }, [error]);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -33,22 +42,25 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
 
   const validatePasswords = (password, re_password) => {
     if (password !== re_password) {
-      setError('As senhas não coincidem');
+      setFormErrors(['As senhas não coincidem']);
     } else {
-      setError('');
+      setFormErrors([]);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiErrors([]); // Limpa os erros recebidos da API
+
     if (isCadastro && password !== re_password) {
-      setError('As senhas não coincidem');
+      setFormErrors(['As senhas não coincidem']);
       return;
     }
     try {
       await onSubmit({ username, email, password, re_password });
     } catch (err) {
-      setError(err.message);
+      console.error('Erro ao enviar formulário:', err);
+      setApiErrors([err.message]);
     }
   };
 
@@ -103,10 +115,17 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
         </>
       )}
 
-      {error && 
-        <Alert variant={'danger'} className={styles.errorAlert}>{error}</Alert>
-      }
-
+      {(formErrors.length > 0 || apiErrors.length > 0) && (
+        <Alert variant={'danger'} className={styles.errorAlert}>
+          {formErrors.map((errorMessage, index) => (
+            <p key={`form-error-${index}`} className={styles.errorMessage}>{errorMessage}</p>
+          ))}
+          {apiErrors.map((errorMessage, index) => (
+            <p key={`api-error-${index}`} className={styles.errorMessage}>{errorMessage}</p>
+          ))}
+        </Alert>
+      )}
+      
       <button type="submit" className={styles.btnLogin}>{buttonText}</button>
     </form>
   );
