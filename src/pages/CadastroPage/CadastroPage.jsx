@@ -21,14 +21,15 @@ const CadastroPage = () => {
           });
     
           if (!response.ok) {
-            throw new Error('Erro ao registrar usuário');
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Erro ao registrar usuário');
           }
     
           const data = await response.json();
           console.log('Registro bem-sucedido:', data);
         } catch (error) {
           console.error('Erro:', error);
-          alert('Erro ao registrar usuário. Por favor, tente novamente.');
+          throw error;
         }
     }
   };

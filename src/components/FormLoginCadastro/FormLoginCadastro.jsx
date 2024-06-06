@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './FormLoginCadastro.module.css';
 
+import Alert from 'react-bootstrap/Alert';
+
 const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
 
   const [username, setUsername] = useState('');
@@ -37,13 +39,17 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isCadastro && password !== re_password) {
       setError('As senhas não coincidem');
       return;
     }
-    onSubmit({ username, email, password, re_password });
+    try {
+      await onSubmit({ username, email, password, re_password });
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -97,7 +103,9 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit }) => {
         </>
       )}
 
-      {error && <p className={styles.error}>{error}</p>}
+      {error && 
+        <Alert variant={'danger'} className={styles.errorAlert}>{error}</Alert>
+      }
 
       <button type="submit" className={styles.btnLogin}>{buttonText}</button>
     </form>

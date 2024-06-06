@@ -22,6 +22,10 @@
     gap: 7px;
 }
 
+.errorAlert {
+    margin-top: 10px;
+}
+
 .btnLogin {
     margin: 20px 0px;
     width: 40%;

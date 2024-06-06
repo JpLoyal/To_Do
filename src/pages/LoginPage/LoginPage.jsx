@@ -21,7 +21,8 @@ const LoginPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Erro ao fazer login');
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Erro ao fazer login');
       }
 
       const data = await response.json();
@@ -31,7 +32,7 @@ const LoginPage = () => {
 
     } catch (error) {
       console.error('Erro:', error);
-      alert('Erro ao fazer login. Por favor, tente novamente.');
+      throw error;
     }
   }; // Fechando a função onSubmit corretamente aqui
 

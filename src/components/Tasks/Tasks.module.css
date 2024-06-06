@@ -23,6 +23,7 @@
 .spanDataHorario {
     display: flex;
     gap: 3px;
+    align-items: center;
 }
 
 .botaoConcluirTarefa {
@@ -34,7 +35,7 @@
 .botoesAttDel {
     background-color: var(--branco);
     color: black;
-    padding: 4px 4px 0px 4px;
+    padding: 4px 4px 4px 4px;
     border-radius: 3px;
     font-weight: 500;
     border: 1px solid black;
