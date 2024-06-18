@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './FormLoginCadastro.module.css';
+import { Link } from 'react-router-dom';
 
 import Alert from 'react-bootstrap/Alert';
 
@@ -127,6 +128,7 @@ const FormComponent = ({ title, isCadastro, buttonText, onSubmit, error }) => {
       )}
       
       <button type="submit" className={styles.btnLogin}>{buttonText}</button>
+      <Link to='/'><button type="button" className={styles.btnVoltar}>Voltar</button></Link>
     </form>
   );
 };
